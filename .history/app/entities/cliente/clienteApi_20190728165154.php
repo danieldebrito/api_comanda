@@ -11,7 +11,7 @@ class clienteApi extends cliente implements IApiCRUD {
 	}
 
 	public function readApi($request, $response, $args) {
-		$id_cliente=$args['id_cliente'];
+		$id_cliente=$args['id'];
 	 	$clienteRet = cliente::read($id_cliente);
 		$newResponse = $response->withJson($clienteRet, 200);  
 	 	return $newResponse;

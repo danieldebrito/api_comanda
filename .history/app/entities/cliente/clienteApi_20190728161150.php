@@ -12,39 +12,47 @@ class clienteApi extends cliente implements IApiCRUD {
 
 	public function readApi($request, $response, $args) {
 		$id_cliente=$args['id_cliente'];
+		var_dump($args['id_cliente']);
 	 	$clienteRet = cliente::read($id_cliente);
 		$newResponse = $response->withJson($clienteRet, 200);  
 	 	return $newResponse;
-	 }
-	 
-	 public function CreateApi($request, $response, $args) {
+ }
+}
 
+/*
+ public function setOne($request, $response, $args) {
 		$ArrayDeParametros = $request->getParsedBody();
 
-		$id_cliente = $ArrayDeParametros['id_cliente'];
-		$nombre_y_apellido = $ArrayDeParametros['nombre_y_apellido'];
-		$dni = $ArrayDeParametros['dni'];
-		$sexo = $ArrayDeParametros['sexo'];
-		$edad = $ArrayDeParametros['edad'];
+		$idMaquina = $ArrayDeParametros['idMaquina'];
+		$detalle = $ArrayDeParametros['detalle'];
+		$marca = $ArrayDeParametros['marca'];
+		$sector = $ArrayDeParametros['sector'];
+		$estado = $ArrayDeParametros['estado'];
+		$urlImagen = $ArrayDeParametros['urlImagen'];
+		$fabricanteNombre = $ArrayDeParametros['fabricanteNombre'];
+		$fabricanteDireccion = $ArrayDeParametros['fabricanteDireccion'];
+		$fabricanteTelefono = $ArrayDeParametros['fabricanteTelefono'];
+		$fabricanteContacto = $ArrayDeParametros['fabricanteContacto'];
 
-		$cliente = new cliente();
+		$maquina = new maquina();
 
-		$cliente->id_cliente=$id_cliente;
-		$cliente->nombre_y_apellido=$nombre_y_apellido;
-		$cliente->dni=$dni;
-		$cliente->sexo=$sexo;
-		$cliente->edad=$edad;
+		$maquina->idMaquina=$idMaquina;
+		$maquina->detalle=$detalle;
+		$maquina->marca=$marca;
+		$maquina->sector=$sector;
+		$maquina->estado=$estado;
+		$maquina->urlImagen=$urlImagen;
+		$maquina->fabricanteNombre=$fabricanteNombre;
+		$maquina->fabricanteDireccion=$fabricanteDireccion;
+		$maquina->fabricanteTelefono=$fabricanteTelefono;
+		$maquina->fabricanteContacto=$fabricanteContacto;
 		
-		$cliente->create();
+		$maquina->CargarUno();
 
 		$response->getBody()->write("true");
 
 		return $response;
-	}
 }
-
-/*
-
 
     public function delete($request,$response,$args){
         $id = $args["id"];

@@ -9,42 +9,50 @@ class clienteApi extends cliente implements IApiCRUD {
 		$newResponse = $response->withJson($all, 200);
 		return $newResponse;
 	}
-
-	public function readApi($request, $response, $args) {
-		$id_cliente=$args['id_cliente'];
-	 	$clienteRet = cliente::read($id_cliente);
-		$newResponse = $response->withJson($clienteRet, 200);  
-	 	return $newResponse;
-	 }
-	 
-	 public function CreateApi($request, $response, $args) {
-
-		$ArrayDeParametros = $request->getParsedBody();
-
-		$id_cliente = $ArrayDeParametros['id_cliente'];
-		$nombre_y_apellido = $ArrayDeParametros['nombre_y_apellido'];
-		$dni = $ArrayDeParametros['dni'];
-		$sexo = $ArrayDeParametros['sexo'];
-		$edad = $ArrayDeParametros['edad'];
-
-		$cliente = new cliente();
-
-		$cliente->id_cliente=$id_cliente;
-		$cliente->nombre_y_apellido=$nombre_y_apellido;
-		$cliente->dni=$dni;
-		$cliente->sexo=$sexo;
-		$cliente->edad=$edad;
-		
-		$cliente->create();
-
-		$response->getBody()->write("true");
-
-		return $response;
-	}
 }
 
 /*
 
+public function getOne($request, $response, $args) {
+		$id=$args['id'];
+	 	$maquinaRetorno = maquina::TraerUno($id);
+		$newResponse = $response->withJson($maquinaRetorno, 200);  
+	 	return $newResponse;
+ }
+
+ public function setOne($request, $response, $args) {
+		$ArrayDeParametros = $request->getParsedBody();
+
+		$idMaquina = $ArrayDeParametros['idMaquina'];
+		$detalle = $ArrayDeParametros['detalle'];
+		$marca = $ArrayDeParametros['marca'];
+		$sector = $ArrayDeParametros['sector'];
+		$estado = $ArrayDeParametros['estado'];
+		$urlImagen = $ArrayDeParametros['urlImagen'];
+		$fabricanteNombre = $ArrayDeParametros['fabricanteNombre'];
+		$fabricanteDireccion = $ArrayDeParametros['fabricanteDireccion'];
+		$fabricanteTelefono = $ArrayDeParametros['fabricanteTelefono'];
+		$fabricanteContacto = $ArrayDeParametros['fabricanteContacto'];
+
+		$maquina = new maquina();
+
+		$maquina->idMaquina=$idMaquina;
+		$maquina->detalle=$detalle;
+		$maquina->marca=$marca;
+		$maquina->sector=$sector;
+		$maquina->estado=$estado;
+		$maquina->urlImagen=$urlImagen;
+		$maquina->fabricanteNombre=$fabricanteNombre;
+		$maquina->fabricanteDireccion=$fabricanteDireccion;
+		$maquina->fabricanteTelefono=$fabricanteTelefono;
+		$maquina->fabricanteContacto=$fabricanteContacto;
+		
+		$maquina->CargarUno();
+
+		$response->getBody()->write("true");
+
+		return $response;
+}
 
     public function delete($request,$response,$args){
         $id = $args["id"];

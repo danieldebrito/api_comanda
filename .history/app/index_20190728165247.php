@@ -24,7 +24,7 @@ $app->get("/", function() {
 
 $app->group('/clientes', function () {
   $this->get('/', \clienteApi::class . ':readAllApi');
-  $this->get('/{id_cliente}', \clienteApi::class . ':readApi');
+  $this->get('/{id}', \clienteApi::class . ':readApi');
   $this->post('/', \clienteApi::class . ':createApi');
 });
 
