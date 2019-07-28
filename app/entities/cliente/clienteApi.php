@@ -1,18 +1,19 @@
 <?php
-require_once 'client.php';
+require_once 'cliente.php';
 require_once 'IApiCRUD.php';
 
-class clientApi extends client implements IApiCRUD {
+class clienteApi extends cliente implements IApiCRUD {
 
-	public function ReadAll($request, $response, $args) {
-		$all=client::ReadAll();
+	public function readAllApi($request, $response, $args) {
+		$all=cliente::readAll();
 		$newResponse = $response->withJson($all, 200);
 		return $newResponse;
 	}
+}
 
-	/*
+/*
 
-	public function getOne($request, $response, $args) {
+public function getOne($request, $response, $args) {
 		$id=$args['id'];
 	 	$maquinaRetorno = maquina::TraerUno($id);
 		$newResponse = $response->withJson($maquinaRetorno, 200);  
@@ -84,5 +85,6 @@ class clientApi extends client implements IApiCRUD {
 
 	   $objDelaRespuesta->resultado=$resultado;
 	   return $response->withJson($objDelaRespuesta, 200);		
-   } */
-}
+   }
+
+*/

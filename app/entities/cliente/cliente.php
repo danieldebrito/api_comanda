@@ -1,33 +1,24 @@
 <?php
-class Client
-{
+class cliente{
 	public $id_cliente;
-	public $nombre_y_apellido;
-	public $dni;
-	public $sexo;
-	public $edad;
+    public $nombre_y_apellido;
+    public $dni;
+    public $sexo;
+    public $edad;
 
-	public static function ReadAll(){
-		try {
-			
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			
-			$consulta =$objetoAccesoDato->RetornarConsulta("
-			SELECT * FROM `clientes` WHERE 1
-			");
-			
-			$consulta->execute();
-		} catch (Exception $e) {
-			$mensaje = $e->getMessage();
-			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-		}
-		finally {	
-				return $consulta->fetchAll(PDO::FETCH_CLASS, "Client");		
-			}
+	public static function readAll(){
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("
+		SELECT * FROM `clientes` WHERE 1
+		");
+		$consulta->execute();		
+		return $consulta->fetchAll(PDO::FETCH_CLASS, "cliente");		
 	}
+}
 
-	/*
 
+/*
+ 
 	public static function TraerUno($id) {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 		$consulta =$objetoAccesoDato->RetornarConsulta("
@@ -135,5 +126,5 @@ class Client
 
 		  return $consulta->execute();
 	}
-	*/
-}
+
+ */
