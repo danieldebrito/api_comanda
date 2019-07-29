@@ -26,8 +26,8 @@ $app->group('/clientes', function () {
   $this->get('/', \clienteApi::class . ':readAllApi');
   $this->get('/{id_cliente}', \clienteApi::class . ':readApi');
   $this->post('/', \clienteApi::class . ':createApi');
-  $this->delete('/{id_cliente}[/]', \clienteApi::class . ':deleteApi');
-  $this->post('/update', \clienteApi::class . ':updateApi');
+  $this->delete('/{id}[/]', \clienteApi::class . ':deleteApi');
+
 });
 
 

@@ -58,14 +58,14 @@ class clienteApi extends cliente implements IApiCRUD
     {
         $ArrayDeParametros = $request->getParsedBody();
         $cliente = new cliente();
-        $cliente->id_cliente = $ArrayDeParametros['id_cliente'];
-        $cliente->nombre_y_apellido = $ArrayDeParametros['nombre_y_apellido'];
-        $cliente->dni = $ArrayDeParametros['dni'];
-		$cliente->sexo = $ArrayDeParametros['sexo'];
-		$cliente->edad = $ArrayDeParametros['edad'];
+        $cliente->id = $ArrayDeParametros['id'];
+        $cliente->titulo = $ArrayDeParametros['titulo'];
+        $cliente->cantante = $ArrayDeParametros['cantante'];
+        $cliente->año = $ArrayDeParametros['anio'];
 
-        $resultado = $cliente->update();
+        $resultado = $cliente->ModificarCdParametros();
         $objDelaRespuesta = new stdclass();
+        //var_dump($resultado);
         $objDelaRespuesta->resultado = $resultado;
         return $response->withJson($objDelaRespuesta, 200);
     }

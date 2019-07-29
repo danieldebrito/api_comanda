@@ -78,7 +78,7 @@ class cliente
         }
     }
 
-    public static function delete($id_cliente){
+    public static function Baja($id_cliente){
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta("
@@ -96,26 +96,6 @@ class cliente
         } finally {
             return $respuesta;
         }
-    }
-
-    public function update()
-    {
-        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("
-                UPDATE `clientes`
-                SET `nombre_y_apellido`=:nombre_y_apellido,
-                    `dni`=:dni,
-                    `sexo`=:sexo,
-                    `edad`=:edad 
-                WHERE id_cliente=:id_cliente");
-                
-        $consulta->bindValue(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
-        $consulta->bindValue(':nombre_y_apellido', $this->nombre_y_apellido, PDO::PARAM_STR);
-        $consulta->bindValue(':dni', $this->dni, PDO::PARAM_INT);
-        $consulta->bindValue(':sexo', $this->sexo, PDO::PARAM_STR);
-        $consulta->bindValue(':edad', $this->edad, PDO::PARAM_INT);
-        
-        return $consulta->execute();
     }
 
 }
