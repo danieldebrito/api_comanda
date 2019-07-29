@@ -5,10 +5,9 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../composer/vendor/autoload.php';
 require './AccesoDatos.php';
 
-///////////////////   ENTITIES  ///////////
+///////////////////////////////////// entidades ///////////
 require './entities/cliente/clienteApi.php';
 require './entities/comanda/comandaApi.php';
-require './entities/empleados/empleadoApi.php';
 
 
 $config['displayErrorDetails'] = true;
@@ -18,7 +17,7 @@ $app = new \Slim\App(["settings" => $config]);
 
 $app->get("/", function() {
   echo "
-  <p style='font-size:50px;'>Hola mundo desde api_comanda</p> 
+  <p style='font-size:50px;'>Hola mundo desde api_meyro_sgc</p> 
   <br> <br> 
   <p style='font-family:courier;'>Conexion ok con la API.</p>
   ";
@@ -38,14 +37,6 @@ $app->group('/comandas', function () {
   $this->post('/', \comandaApi::class . ':createApi');
   $this->delete('/{id_comanda}[/]', \comandaApi::class . ':deleteApi');
   $this->post('/update', \comandaApi::class . ':updateApi');
-});
-
-$app->group('/empleados', function () {
-  $this->get('/', \empleadoApi::class . ':readAllApi');
-  $this->get('/{id_empleado}', \empleadoApi::class . ':readApi');
-  $this->post('/', \empleadoApi::class . ':createApi');
-  $this->delete('/{id_empleado}[/]', \empleadoApi::class . ':deleteApi');
-  $this->post('/update', \empleadoApi::class . ':updateApi');
 });
 
 

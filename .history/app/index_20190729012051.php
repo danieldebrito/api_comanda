@@ -40,14 +40,6 @@ $app->group('/comandas', function () {
   $this->post('/update', \comandaApi::class . ':updateApi');
 });
 
-$app->group('/empleados', function () {
-  $this->get('/', \empleadoApi::class . ':readAllApi');
-  $this->get('/{id_empleado}', \empleadoApi::class . ':readApi');
-  $this->post('/', \empleadoApi::class . ':createApi');
-  $this->delete('/{id_empleado}[/]', \empleadoApi::class . ':deleteApi');
-  $this->post('/update', \empleadoApi::class . ':updateApi');
-});
-
 
 // cors habilitadas
 $app->add(function ($req, $res, $next) {
