@@ -10,6 +10,7 @@ require './entities/cliente/clienteApi.php';
 require './entities/comanda/comandaApi.php';
 require './entities/empleados/empleadoApi.php';
 require './entities/comanda_productos/comanda_productosApi.php';
+require './entities/encuestas/encuestasApi.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -54,6 +55,14 @@ $app->group('/comanda_productos', function () {
   $this->post('/', \comanda_productoApi::class . ':createApi');
   $this->delete('/{id_comanda_producto}[/]', \comanda_productoApi::class . ':deleteApi');
   $this->post('/update', \comanda_productoApi::class . ':updateApi');
+});
+
+$app->group('/encuestas', function () {
+  $this->get('/', \encuestaApi::class . ':readAllApi');
+  $this->get('/{id_encuesta}', \encuestaApi::class . ':readApi');
+  $this->post('/', \encuestaApi::class . ':createApi');
+  $this->delete('/{id_encuesta}[/]', \encuestaApi::class . ':deleteApi');
+  $this->post('/update', \encuestaApi::class . ':updateApi');
 });
 
 

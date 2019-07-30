@@ -70,33 +70,3 @@ class clienteApi extends cliente implements IApiCRUD
         return $response->withJson($objDelaRespuesta, 200);
     }
 }
-
-/*
-
-public function updateOne($request, $response, $args) {
-
-$ArrayDeParametros = $request->getParsedBody();
-
-var_dump($ArrayDeParametros);
-
-$MiMaquina = new maquina();
-
-// $MiMaquina->idMaquina=$ArrayDeParametros["idMaquina"];
-$MiMaquina->detalle=$ArrayDeParametros["detalle"];
-$MiMaquina->marca=$ArrayDeParametros["marca"];
-$MiMaquina->sector=$ArrayDeParametros["sector"];
-$MiMaquina->estado=$ArrayDeParametros["estado"];
-$MiMaquina->urlImagen=$ArrayDeParametros["urlImagen"];
-$MiMaquina->fabricanteNombre=$ArrayDeParametros["fabricanteNombre"];
-$MiMaquina->fabricanteDireccion=$ArrayDeParametros["fabricanteDireccion"];
-$MiMaquina->fabricanteTelefono=$ArrayDeParametros["fabricanteTelefono"];
-$MiMaquina->fabricanteContacto=$ArrayDeParametros["fabricanteContacto"];
-
-$resultado = $MiMaquina->ModificarUno();
-$objDelaRespuesta= new stdclass();
-
-$objDelaRespuesta->resultado=$resultado;
-return $response->withJson($objDelaRespuesta, 200);
-}
-
- */
