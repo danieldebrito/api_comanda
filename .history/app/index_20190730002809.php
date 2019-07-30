@@ -48,12 +48,12 @@ $app->group('/empleados', function () {
   $this->post('/update', \empleadoApi::class . ':updateApi');
 });
 
-$app->group('/comanda_productos', function () {
-  $this->get('/', \comanda_productoApi::class . ':readAllApi');
-  $this->get('/{id_comanda_producto}', \comanda_productoApi::class . ':readApi');
-  $this->post('/', \comanda_productoApi::class . ':createApi');
-  $this->delete('/{id_comanda_producto}[/]', \comanda_productoApi::class . ':deleteApi');
-  $this->post('/update', \comanda_productoApi::class . ':updateApi');
+$app->group('/empleados', function () {
+  $this->get('/', \empleadoApi::class . ':readAllApi');
+  $this->get('/{id_empleado}', \empleadoApi::class . ':readApi');
+  $this->post('/', \empleadoApi::class . ':createApi');
+  $this->delete('/{id_empleado}[/]', \empleadoApi::class . ':deleteApi');
+  $this->post('/update', \empleadoApi::class . ':updateApi');
 });
 
 
