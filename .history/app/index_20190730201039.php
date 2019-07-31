@@ -12,8 +12,7 @@ require './entities/empleados/empleadoApi.php';
 require './entities/comanda_productos/comanda_productosApi.php';
 require './entities/encuestas/encuestasApi.php';
 require './entities/jornadas/jornadasApi.php';
-require './entities/mesas/mesasApi.php';
-require './entities/productos/productosApi.php';
+
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -76,21 +75,6 @@ $app->group('/jornadas', function () {
   $this->post('/update', \jornadaApi::class . ':updateApi');
 });
 
-$app->group('/mesas', function () {
-  $this->get('/', \mesaApi::class . ':readAllApi');
-  $this->get('/{id_mesa}', \mesaApi::class . ':readApi');
-  $this->post('/', \mesaApi::class . ':createApi');
-  $this->delete('/{id_mesa}[/]', \mesaApi::class . ':deleteApi');
-  $this->post('/update', \mesaApi::class . ':updateApi');
-});
-
-$app->group('/productos', function () {
-  $this->get('/', \productoApi::class . ':readAllApi');
-  $this->get('/{id_producto}', \productoApi::class . ':readApi');
-  $this->post('/', \productoApi::class . ':createApi');
-  $this->delete('/{id_producto}[/]', \productoApi::class . ':deleteApi');
-  $this->post('/update', \productoApi::class . ':updateApi');
-});
 
 // cors habilitadas
 $app->add(function ($req, $res, $next) {

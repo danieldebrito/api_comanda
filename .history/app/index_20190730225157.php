@@ -84,14 +84,6 @@ $app->group('/mesas', function () {
   $this->post('/update', \mesaApi::class . ':updateApi');
 });
 
-$app->group('/productos', function () {
-  $this->get('/', \productoApi::class . ':readAllApi');
-  $this->get('/{id_producto}', \productoApi::class . ':readApi');
-  $this->post('/', \productoApi::class . ':createApi');
-  $this->delete('/{id_producto}[/]', \productoApi::class . ':deleteApi');
-  $this->post('/update', \productoApi::class . ':updateApi');
-});
-
 // cors habilitadas
 $app->add(function ($req, $res, $next) {
   $response = $next($req, $res);

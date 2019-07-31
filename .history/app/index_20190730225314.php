@@ -85,11 +85,11 @@ $app->group('/mesas', function () {
 });
 
 $app->group('/productos', function () {
-  $this->get('/', \productoApi::class . ':readAllApi');
-  $this->get('/{id_producto}', \productoApi::class . ':readApi');
-  $this->post('/', \productoApi::class . ':createApi');
-  $this->delete('/{id_producto}[/]', \productoApi::class . ':deleteApi');
-  $this->post('/update', \productoApi::class . ':updateApi');
+  $this->get('/', \productosApi::class . ':readAllApi');
+  $this->get('/{id_producto}', \productosApi::class . ':readApi');
+  $this->post('/', \productosApi::class . ':createApi');
+  $this->delete('/{id_producto}[/]', \productosApi::class . ':deleteApi');
+  $this->post('/update', \productosApi::class . ':updateApi');
 });
 
 // cors habilitadas
