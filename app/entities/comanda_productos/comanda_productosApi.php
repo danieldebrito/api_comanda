@@ -71,4 +71,19 @@ class comanda_productoApi extends comanda_producto implements IApiCRUD
         $objDelaRespuesta->resultado = $resultado;
         return $response->withJson($objDelaRespuesta, 200);
     }
+
+    public function masVendidoApi($request, $response, $args)
+    {
+        $all = comanda_producto::masVendido();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
+
+    public function menosVendidoApi($request, $response, $args)
+    {
+        $all = comanda_producto::menosVendido();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
 }
+

@@ -1,0 +1,166 @@
+Resumen de requerimientos, final de programación 3 La Comanda
+7 - De los empleados:
+a-	Los días y horarios que se Ingresaron al sistema.
+
+SELECT jor.id_empleado AS LEGAJO, emp.nombre_y_apellido AS 'NOMBRE Y APELLIDO', rol.rol_empleado AS 'ROL', jor.entrada_fecha AS FECHA , jor.entrada_hora AS 'HORA ENTRADA', jor.salida_hora AS 'HORA SALIDA'
+FROM jornadas jor
+INNER JOIN empleados emp ON emp.id_empleado = jor.id_empleado
+INNER JOIN roles_empleados rol ON rol.id_rol_empleado = emp.rol_empleado
+
+b- Cantidad de operaciones de todos por sector.
+SELECT sec.sector AS 'SECTOR', COUNT( sec.sector ) AS 'CANTIDAD'
+FROM comanda_productos cp
+INNER JOIN productos pro ON pro.id_producto = cp.id_producto
+INNER JOIN sectores sec ON sec.id_sector = pro.id_sector
+GROUP BY sec.sector
+
+c- Cantidad de operaciones de todos por sector listada por cada empleado.
+SELECT sec.sector AS 'SECTOR', COUNT( sec.sector ) AS 'CANTIDAD', emp.id_empleado AS 'LEGAJO',  emp.nombre_y_apellido AS 'EMPLEADO'
+FROM comanda_productos cp
+INNER JOIN productos pro ON pro.id_producto = cp.id_producto
+INNER JOIN sectores sec ON sec.id_sector = pro.id_sector
+INNER JOIN empleados emp ON emp.id_empleado = cp.id_empleado
+GROUP BY cp.id_empleado  
+
+d- Cantidad de operaciones de cada uno por separado.
+Todos separado por empleado
+SELECT COUNT( emp.id_empleado ) AS 'CANTIDAD', emp.nombre_y_apellido AS 'EMPLEADO'
+FROM comanda_productos cp
+INNER JOIN productos pro ON pro.id_producto = cp.id_producto
+INNER JOIN empleados emp ON emp.id_empleado = cp.id_empleado
+GROUP BY cp.id_empleado
+Uno en particular mediante legajo
+SELECT COUNT( emp.id_empleado ) AS 'CANTIDAD', emp.id_empleado AS 'LEGAJO', emp.nombre_y_apellido AS 'EMPLEADO'
+                FROM comanda_productos cp
+                INNER JOIN productos pro ON pro.id_producto = cp.id_producto
+                INNER JOIN empleados emp ON emp.id_empleado = cp.id_empleado
+                WHERE emp.id_empleado = 'emp00003'
+
+
+e- Posibilidad de dar de alta a nuevos, suspenderlos o borrarlos.
+8-De los pedidos:
+a- lo que más se vendió.
+SELECT pro.producto AS 'PRODUCTO',  COUNT( cp.id_producto ) AS 'CANTIDAD'
+FROM comanda_productos cp
+INNER JOIN productos pro ON pro.id_producto = cp.id_producto 
+GROUP BY cp.id_producto
+ORDER BY COUNT( cp.id_producto )  DESC
+LIMIT 1 
+
+b- lo que menos se vendió.
+SELECT pro.producto AS 'PRODUCTO',  COUNT( cp.id_producto ) AS 'CANTIDAD'
+FROM comanda_productos cp
+INNER JOIN productos pro ON pro.id_producto = cp.id_producto 
+GROUP BY cp.id_producto
+ORDER BY COUNT( cp.id_producto )  ASC
+LIMIT 1 
+
+c- los que no se entregaron en el tiempo estipulado.
+SELECT com.id_comanda AS 'COMANDA ID', com.entregado_a_tiempo AS 'ENTREGADO A TIEMPO'
+FROM comandas com
+WHERE com.entregado_a_tiempo = 0
+
+d- los cancelados.
+SELECT com.id_comanda AS 'COMANDA ID', est.estado AS 'ESTADO'
+FROM comandas com
+INNER JOIN estados_comanda est ON est.id_estado_comanda = com.id_estado_comanda
+WHERE com.id_estado_comanda = 'estComand04'
+
+Requerimientos generales
+# Si al mozo le hacen un pedido de un vino , una cerveza y unas empanadas, deberían los
+empleados correspondientes ver estos pedidos en su listado de “pendientes”
+todos
+SELECT emp.id_empleado , emp.nombre_y_apellido, pro.producto, cp.cantidad, com.id_estado_comanda
+FROM comanda_productos cp
+INNER JOIN productos pro ON pro.id_producto = cp.id_producto
+INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+INNER JOIN empleados emp ON emp.id_empleado = cp.id_empleado  
+WHERE com.id_estado_comanda = 'estComand01'  
+ORDER BY emp.`id_empleado` ASC
+
+Uno en particular
+SELECT emp.id_empleado , emp.nombre_y_apellido, pro.producto, cp.cantidad, com.id_estado_comanda
+FROM comanda_productos cp
+INNER JOIN productos pro ON pro.id_producto = cp.id_producto
+INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+INNER JOIN empleados emp ON emp.id_empleado = cp.id_empleado  
+WHERE com.id_estado_comanda = 'estComand01'
+AND emp.id_empleado = 'emp00007'
+
+
+
+
+
+9- De las mesas:
+a- La más usada.
+SELECT com.id_mesa, COUNT(com.id_mesa) AS 'CANTIDAD'
+FROM comandas com
+GROUP BY com.id_mesa
+ORDER BY COUNT(com.id_mesa) DESC
+LIMIT 1
+
+b- La menos usada.
+SELECT com.id_mesa, COUNT(com.id_mesa) AS 'CANTIDAD'
+FROM comandas com
+GROUP BY com.id_mesa
+ORDER BY COUNT(com.id_mesa) ASC
+LIMIT 1
+
+c- La que más facturó.
+SELECT com.id_mesa AS 'ID MESA', SUM(prod.precio * cp.cantidad) AS 'TOTAL $'
+FROM comanda_productos cp
+INNER JOIN productos prod ON prod.id_producto = cp.id_producto
+INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+GROUP BY com.id_mesa
+ORDER BY SUM(prod.precio * cp.cantidad) DESC
+IMIT 1
+
+d- La que menos facturó.
+SELECT com.id_mesa AS 'ID MESA',  SUM(prod.precio * cp.cantidad) AS 'TOTAL $'
+FROM comanda_productos cp
+INNER JOIN productos prod ON prod.id_producto = cp.id_producto
+INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+GROUP BY com.id_mesa
+ORDER BY SUM(prod.precio * cp.cantidad) ASC
+LIMIT 1
+
+e- la/s que tuvo la factura con el mayor importe.
+SELECT com.id_comanda AS 'ID COMANDA', com.id_mesa AS 'ID MESA', SUM(prod.precio * cp.cantidad) AS 'TOTAL $'
+                FROM comanda_productos cp
+                INNER JOIN productos prod ON prod.id_producto = cp.id_producto
+                INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+                GROUP BY com.id_comanda
+                ORDER BY SUM(prod.precio * cp.cantidad) DESC
+                LIMIT 1
+
+f- la/s que tuvo la factura con el menor importe.
+SELECT com.id_comanda AS 'ID COMANDA', com.id_mesa AS 'ID MESA', SUM(prod.precio * cp.cantidad) AS 'TOTAL $'
+                FROM comanda_productos cp
+                INNER JOIN productos prod ON prod.id_producto = cp.id_producto
+                INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+                GROUP BY com.id_comanda
+                ORDER BY SUM(prod.precio * cp.cantidad) ASC
+                LIMIT 1
+
+g- Lo que facturó entre dos fechas una mesa .
+SELECT com.id_comanda, com.id_mesa, SUM(prod.precio * cp.cantidad) AS 'TOTAL $'
+FROM comanda_productos cp
+INNER JOIN productos prod ON prod.id_producto = cp.id_producto
+INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+WHERE com.id_mesa = 'mesa014'
+AND com.fecha_comanda BETWEEN '2019-01-01' AND '2019-02-01'
+
+h- Mejores comentarios.
+SELECT com.id_comanda, enc.calificacion_restaurante
+FROM comandas com
+INNER JOIN encuestas enc ON enc.id_encuesta = com.id_encuesta
+ORDER BY enc.calificacion_restaurante DESC
+LIMIT 10
+
+i- Peores comentarios.
+SELECT com.id_comanda, enc.calificacion_restaurante
+FROM comandas com
+INNER JOIN encuestas enc ON enc.id_encuesta = com.id_encuesta
+ORDER BY enc.calificacion_restaurante ASC
+LIMIT 10
+

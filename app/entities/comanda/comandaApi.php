@@ -78,4 +78,18 @@ class comandaApi extends comanda implements IApiCRUD
         $objDelaRespuesta->resultado = $resultado;
         return $response->withJson($objDelaRespuesta, 200);
     }
+
+    public function fueraTiempoApi($request, $response, $args)
+    {
+        $all = comanda::fueraTiempo();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
+
+    public function canceladasApi($request, $response, $args)
+    {
+        $all = comanda::canceladas();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
 }

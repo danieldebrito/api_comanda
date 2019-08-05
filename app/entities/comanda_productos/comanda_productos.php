@@ -121,4 +121,49 @@ class comanda_producto
         
         return $consulta->execute();
     }
+
+    public static function masVendido(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT pro.producto AS 'PRODUCTO',  COUNT( cp.id_producto ) AS 'CANTIDAD'
+                FROM comanda_productos cp
+                INNER JOIN productos pro ON pro.id_producto = cp.id_producto 
+                GROUP BY cp.id_producto
+                ORDER BY COUNT( cp.id_producto )  DESC
+                LIMIT 1 
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
+
+    public static function menosVendido(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT pro.producto AS 'PRODUCTO',  COUNT( cp.id_producto ) AS 'CANTIDAD'
+                FROM comanda_productos cp
+                INNER JOIN productos pro ON pro.id_producto = cp.id_producto 
+                GROUP BY cp.id_producto
+                ORDER BY COUNT( cp.id_producto )  ASC
+                LIMIT 1 
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
 }
+
+
+

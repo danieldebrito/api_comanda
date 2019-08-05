@@ -1,9 +1,15 @@
-                documentacion de la api
+                Documentacion api comanda
 
 Daniel Ruben de Brito
+final Programacion III
+08/2019
 
+Requerimientos : 
 
-7-De los empleados:a-Los días y horarios que se Ingresaron al sistema.
+///////////////////////////////////////////////////////////////////////////////
+7-De los empleados:
+
+a-Los días y horarios que se Ingresaron al sistema.
     GET
     http://localhost/api_comanda/app/horarios
 
@@ -22,16 +28,53 @@ d-Cantidad de operaciones de cada uno por separado.
 
 e-Posibilidad de dar de alta a nuevos, suspenderlos o borrarlos.
 
-8-De las pedidos:a-lo que más se vendió .
-b-lo que menos se vendió .
-c-los que no se entregaron en el tiempo estipulado.
-d-los cancelados.
+//////////////////////////////////////////////////////////////////////////////////////
+8-De las pedidos: 
 
-9- De las mesas :a-La más usada.
+a-lo que más se vendió
+    GET
+    http://localhost/api_comanda/app/masvendido
+
+b-lo que menos se vendió
+    GET
+    http://localhost/api_comanda/app/menosvendido
+
+c-los que no se entregaron en el tiempo estipulado.
+    GET
+    http://localhost/api_comanda/app/fueraTiempo
+
+d-los cancelados.
+    GET
+    http://localhost/api_comanda/app/canceladas
+
+////////////////////////////////////////////////////////////////////////////////////////
+9- De las mesas :
+
+a-La más usada.
+    GET
+    http://localhost/api_comanda/app/mesaMasUsada
+
 b-La menos usada.
+    GET
+    http://localhost/api_comanda/app/mesaMenosUsada
+
 c-La que más facturó.
+    GET
+    http://localhost/api_comanda/app/mesaMasFacturo
+
 d-La que menos facturó.
+    GET
+    http://localhost/api_comanda/app/mesaMenosFacturo
+
 e-la/s que tuvo la factura con el mayor importe.
+    GET
+    http://localhost/api_comanda/app/mesaFacMayor
+
 f-la/s que tuvo la factura con el menor importe.
+    GET
+    http://localhost/api_comanda/app/mesaFacMenor
+
 g-Lo que facturó entre dos fechas una mesa .
+
+
 h-Mejores comentarios.i-Peores comentarios.

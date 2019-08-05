@@ -62,4 +62,49 @@ class mesaApi extends mesa implements IApiCRUD
         $objDelaRespuesta->resultado = $resultado;
         return $response->withJson($objDelaRespuesta, 200);
     }
+
+    public function mesaMasUsadaApi($request, $response, $args)
+    {
+        $all = mesa::mesaMasUsada();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
+
+    public function mesaMenosUsadaApi($request, $response, $args)
+    {
+        $all = mesa::mesaMenosUsada();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
+
+    public function mesaMasFacturoApi($request, $response, $args)
+    {
+        $all = mesa::mesaMasFacturo();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
+
+    public function mesaMenosFacturoApi($request, $response, $args)
+    {
+        $all = mesa::mesaMenosFacturo();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
+
+    public function mesaFacMAyorApi($request, $response, $args)
+    {
+        $all = mesa::mesaFacMAyor();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
+
+    public function mesaFacMenorApi($request, $response, $args)
+    {
+        $all = mesa::mesaFacMenor();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
 }
+
+
+

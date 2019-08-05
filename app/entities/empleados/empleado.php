@@ -10,11 +10,11 @@ class empleado
     {
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta("
-			SELECT * FROM `empleados` WHERE 1
-			");
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            (" SELECT * FROM `empleados` WHERE 1 
+            ");
             $consulta->execute();
-            $ret = $consulta->fetchAll(PDO::FETCH_CLASS, "empleado"); /*X*/
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS, "empleado");
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
@@ -28,10 +28,10 @@ class empleado
         try {
 
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta("
-			SELECT *
-			FROM `empleados`
-			WHERE `id_empleado` = '$id_empleado'
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT *
+			    FROM `empleados`
+			    WHERE `id_empleado` = '$id_empleado'
 			");
             $consulta->execute();
             $ret = $consulta->fetchObject('empleado');
@@ -47,13 +47,13 @@ class empleado
     {
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta("
-			INSERT INTO `empleados`
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  INSERT INTO `empleados`
 				(`id_empleado`,
 				`rol_empleado`,
 				`id_estado_empleado`,
                 `nombre_y_apellido`)
-			VALUES (
+			    VALUES (
 				:id_empleado,
 				:rol_empleado,
 				:id_estado_empleado,
@@ -78,8 +78,8 @@ class empleado
     {
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta("
-                DELETE FROM `empleados`
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  DELETE FROM `empleados`
                 WHERE `id_empleado` = '$id_empleado'
             ");
             $consulta->bindValue(':id_empleado', $id_empleado, PDO::PARAM_STR);
@@ -98,8 +98,8 @@ class empleado
     public function update()
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("
-                UPDATE `empleados`
+        $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  UPDATE `empleados`
                 SET
 				`rol_empleado`=:rol_empleado,
 				`id_estado_empleado`=:id_estado_empleado,
@@ -119,13 +119,13 @@ class empleado
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
-                ("SELECT jor.id_empleado AS LEGAJO, emp.nombre_y_apellido AS 'NOMBRE Y APELLIDO', rol.rol_empleado AS 'ROL', jor.entrada_fecha AS FECHA , jor.entrada_hora AS 'HORA ENTRADA', jor.salida_hora AS 'HORA SALIDA'
-            FROM jornadas jor
-            INNER JOIN empleados emp ON emp.id_empleado = jor.id_empleado
-            INNER JOIN roles_empleados rol ON rol.id_rol_empleado = emp.rol_empleado
+            ("  SELECT jor.id_empleado AS LEGAJO, emp.nombre_y_apellido AS 'NOMBRE Y APELLIDO', rol.rol_empleado AS 'ROL', jor.entrada_fecha AS FECHA , jor.entrada_hora AS 'HORA ENTRADA', jor.salida_hora AS 'HORA SALIDA'
+                FROM jornadas jor
+                INNER JOIN empleados emp ON emp.id_empleado = jor.id_empleado
+                INNER JOIN roles_empleados rol ON rol.id_rol_empleado = emp.rol_empleado
 			");
             $consulta->execute();
-            $ret = $consulta->fetchAll();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
@@ -139,14 +139,14 @@ class empleado
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
-                ("SELECT sec.sector AS 'SECTOR', COUNT( sec.sector ) AS 'CANTIDAD'
+            ("  SELECT sec.sector AS 'SECTOR', COUNT( sec.sector ) AS 'CANTIDAD'
                 FROM comanda_productos cp
                 INNER JOIN productos pro ON pro.id_producto = cp.id_producto
                 INNER JOIN sectores sec ON sec.id_sector = pro.id_sector
                 GROUP BY sec.sector                
 			");
             $consulta->execute();
-            $ret = $consulta->fetchAll();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
@@ -160,7 +160,7 @@ class empleado
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
-                ("SELECT sec.sector AS 'SECTOR', COUNT( sec.sector ) AS 'CANTIDAD', emp.id_empleado AS 'LEGAJO',  emp.nombre_y_apellido AS 'EMPLEADO'
+            ("  SELECT sec.sector AS 'SECTOR', COUNT( sec.sector ) AS 'CANTIDAD', emp.id_empleado AS 'LEGAJO',  emp.nombre_y_apellido AS 'EMPLEADO'
                 FROM comanda_productos cp
                 INNER JOIN productos pro ON pro.id_producto = cp.id_producto
                 INNER JOIN sectores sec ON sec.id_sector = pro.id_sector
@@ -168,7 +168,7 @@ class empleado
                 GROUP BY cp.id_empleado                            
 			");
             $consulta->execute();
-            $ret = $consulta->fetchAll();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
@@ -189,7 +189,7 @@ class empleado
                 WHERE emp.id_empleado = '$id_empleado'                       
 			");
             $consulta->execute();
-            $ret = $consulta->fetchAll();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");

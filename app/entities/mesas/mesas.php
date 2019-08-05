@@ -109,4 +109,139 @@ class mesa
         
         return $consulta->execute();
     }
+
+    public static function mesaMasUsada(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_mesa, COUNT(com.id_mesa) AS 'CANTIDAD'
+                FROM comandas com
+                GROUP BY com.id_mesa
+                ORDER BY COUNT(com.id_mesa) DESC
+                LIMIT 1
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
+
+    public static function mesaMenosUsada(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_mesa, COUNT(com.id_mesa) AS 'CANTIDAD'
+                FROM comandas com
+                GROUP BY com.id_mesa
+                ORDER BY COUNT(com.id_mesa) ASC
+                LIMIT 1
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
+
+    public static function mesaMasFacturo(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_mesa AS 'ID MESA', SUM(prod.precio * cp.cantidad) AS 'TOTAL $'
+                FROM comanda_productos cp
+                INNER JOIN productos prod ON prod.id_producto = cp.id_producto
+                INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+                GROUP BY com.id_mesa
+                ORDER BY SUM(prod.precio * cp.cantidad) DESC
+                LIMIT 1
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
+
+    public static function mesaMenosFacturo(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_mesa AS 'ID MESA',  SUM(prod.precio * cp.cantidad) AS 'TOTAL $'
+                FROM comanda_productos cp
+                INNER JOIN productos prod ON prod.id_producto = cp.id_producto
+                INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+                GROUP BY com.id_mesa
+                ORDER BY SUM(prod.precio * cp.cantidad) ASC
+                LIMIT 1
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
+
+    public static function mesaFacMAyor(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_comanda AS 'ID COMANDA', com.id_mesa AS 'ID MESA', SUM(prod.precio * cp.cantidad) AS 'TOTAL $'
+                FROM comanda_productos cp
+                INNER JOIN productos prod ON prod.id_producto = cp.id_producto
+                INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+                GROUP BY com.id_comanda
+                ORDER BY SUM(prod.precio * cp.cantidad) DESC
+                LIMIT 1
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
+
+    public static function mesaFacMenor(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_comanda AS 'ID COMANDA', com.id_mesa AS 'ID MESA', SUM(prod.precio * cp.cantidad) AS 'TOTAL $'
+                FROM comanda_productos cp
+                INNER JOIN productos prod ON prod.id_producto = cp.id_producto
+                INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+                GROUP BY com.id_comanda
+                ORDER BY SUM(prod.precio * cp.cantidad) ASC
+                LIMIT 1
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
 }
+
+
+
+
+
+
+

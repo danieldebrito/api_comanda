@@ -137,4 +137,43 @@ class comanda
         return $consulta->execute();
     }
 
+    public static function fueraTiempo(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_comanda AS 'COMANDA ID', com.entregado_a_tiempo AS 'ENTREGADO A TIEMPO'
+                FROM comandas com
+                WHERE com.entregado_a_tiempo = 0   
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
+
+    public static function canceladas(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_comanda AS 'COMANDA ID', est.estado AS 'ESTADO'
+                FROM comandas com
+                INNER JOIN estados_comanda est ON est.id_estado_comanda = com.id_estado_comanda
+                WHERE com.id_estado_comanda = 'estComand04' 
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
 }
+
+
+

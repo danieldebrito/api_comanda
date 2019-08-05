@@ -43,6 +43,9 @@ $app->group('/comandas', function () {
   $this->delete('/{id_comanda}[/]', \comandaApi::class . ':deleteApi');
   $this->post('/update', \comandaApi::class . ':updateApi');
 });
+$app->get('/fueraTiempo', \comandaApi::class . ':fueraTiempoApi');
+$app->get('/canceladas', \comandaApi::class . ':canceladasApi');
+
 
 $app->group('/empleados', function () {
   $this->get('/', \empleadoApi::class . ':readAllApi');
@@ -64,6 +67,10 @@ $app->group('/comanda_productos', function () {
   $this->delete('/{id_comanda_producto}[/]', \comanda_productoApi::class . ':deleteApi');
   $this->post('/update', \comanda_productoApi::class . ':updateApi');
 });
+$app->get('/masvendido', \comanda_productoApi::class . ':masVendidoApi');
+$app->get('/menosvendido', \comanda_productoApi::class . ':menosVendidoApi');
+
+
 
 $app->group('/encuestas', function () {
   $this->get('/', \encuestaApi::class . ':readAllApi');
@@ -88,6 +95,14 @@ $app->group('/mesas', function () {
   $this->delete('/{id_mesa}[/]', \mesaApi::class . ':deleteApi');
   $this->post('/update', \mesaApi::class . ':updateApi');
 });
+$app->get('/mesaMasUsada', \mesaApi::class . ':mesaMasUsadaApi');
+$app->get('/mesaMenosUsada', \mesaApi::class . ':mesaMenosUsadaApi');
+$app->get('/mesaMasFacturo', \mesaApi::class . ':mesaMasFacturoApi');
+$app->get('/mesaMenosFacturo', \mesaApi::class . ':mesaMenosFacturoApi');
+$app->get('/mesaFacMAyor', \mesaApi::class . ':mesaFacMAyorApi');
+$app->get('/mesaFacMenor', \mesaApi::class . ':mesaFacMenorApi');
+
+
 
 $app->group('/productos', function () {
   $this->get('/', \productoApi::class . ':readAllApi');
