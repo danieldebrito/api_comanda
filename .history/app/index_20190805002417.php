@@ -53,8 +53,6 @@ $app->group('/empleados', function () {
 });
 $app->get('/horarios', \empleadoApi::class . ':horariosAllApi');
 $app->get('/operaciones', \empleadoApi::class . ':operacionesAllApi');
-$app->get('/operEmpSecAll', \empleadoApi::class . ':operEmpSecAllApi');
-$app->get('/operEmpSec/{id_empleado}', \empleadoApi::class . ':operEmpSecApi');
 
 
 $app->group('/comanda_productos', function () {

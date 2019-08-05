@@ -93,9 +93,8 @@ class empleadoApi extends empleado implements IApiCRUD
 
     public function operEmpSecApi($request, $response, $args)
     {
-        $id = $args['id_empleado'];
-        $Ret = empleado::operEmpSec($id);
-        $newResponse = $response->withJson($Ret, 200);
+        $all = empleado::operEmpSec();
+        $newResponse = $response->withJson($all, 200);
         return $newResponse;
     }
 }

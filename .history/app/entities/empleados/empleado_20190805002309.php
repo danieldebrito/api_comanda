@@ -155,49 +155,4 @@ class empleado
         }
     }
 
-    public static function operEmpSecAll()
-    {
-        try {
-            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta
-                ("SELECT sec.sector AS 'SECTOR', COUNT( sec.sector ) AS 'CANTIDAD', emp.id_empleado AS 'LEGAJO',  emp.nombre_y_apellido AS 'EMPLEADO'
-                FROM comanda_productos cp
-                INNER JOIN productos pro ON pro.id_producto = cp.id_producto
-                INNER JOIN sectores sec ON sec.id_sector = pro.id_sector
-                INNER JOIN empleados emp ON emp.id_empleado = cp.id_empleado
-                GROUP BY cp.id_empleado                            
-			");
-            $consulta->execute();
-            $ret = $consulta->fetchAll();
-        } catch (Exception $e) {
-            $mensaje = $e->getMessage();
-            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-        } finally {
-            return $ret;
-        }
-    }
-
-    public static function operEmpSec($id_empleado)
-    {
-        try {
-            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta
-                ("SELECT COUNT( emp.id_empleado ) AS 'CANTIDAD', emp.id_empleado AS 'LEGAJO', emp.nombre_y_apellido AS 'EMPLEADO'
-                FROM comanda_productos cp
-                INNER JOIN productos pro ON pro.id_producto = cp.id_producto
-                INNER JOIN empleados emp ON emp.id_empleado = cp.id_empleado
-                WHERE emp.id_empleado = '$id_empleado'                       
-			");
-            $consulta->execute();
-            $ret = $consulta->fetchAll();
-        } catch (Exception $e) {
-            $mensaje = $e->getMessage();
-            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-        } finally {
-            return $ret;
-        }
-    }
-
 }
-
-

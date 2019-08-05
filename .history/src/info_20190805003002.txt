@@ -1,8 +1,3 @@
-                documentacion de la api
-
-Daniel Ruben de Brito
-
-
 7-De los empleados:a-Los días y horarios que se Ingresaron al sistema.
     GET
     http://localhost/api_comanda/app/horarios
@@ -13,13 +8,9 @@ b-Cantidad de operaciones de todos  por sector.
     http://localhost/api_comanda/app/operaciones
 
 c-Cantidad de operaciones de todos  por sector  listada por cada empleado.
-    GET
-    http://localhost/api_comanda/app/operEmpSecAll
+
 
 d-Cantidad de operaciones de cada uno por separado.
-   GET
-    http://localhost/api_comanda/app/operEmpSec/emp00003
-
 e-Posibilidad de dar de alta a nuevos, suspenderlos o borrarlos.
 
 8-De las pedidos:a-lo que más se vendió .
