@@ -117,8 +117,8 @@ class empleado
     {
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta
-            ("SELECT jor.id_empleado AS LEGAJO, emp.nombre_y_apellido AS 'NOMBRE Y APELLIDO', rol.rol_empleado AS 'ROL', jor.entrada_fecha AS FECHA , jor.entrada_hora AS 'HORA ENTRADA', jor.salida_hora AS 'HORA SALIDA'
+            $consulta = $objetoAccesoDato->RetornarConsulta("
+			SELECT jor.id_empleado AS LEGAJO, emp.nombre_y_apellido AS 'NOMBRE Y APELLIDO', rol.rol_empleado AS 'ROL', jor.entrada_fecha AS FECHA , jor.entrada_hora AS 'HORA ENTRADA', jor.salida_hora AS 'HORA SALIDA'
             FROM jornadas jor
             INNER JOIN empleados emp ON emp.id_empleado = jor.id_empleado
             INNER JOIN roles_empleados rol ON rol.id_rol_empleado = emp.rol_empleado

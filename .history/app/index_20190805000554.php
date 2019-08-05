@@ -51,6 +51,7 @@ $app->group('/empleados', function () {
   $this->delete('/{id_empleado}[/]', \empleadoApi::class . ':deleteApi');
   $this->post('/update', \empleadoApi::class . ':updateApi');
 });
+
 $app->get('/horarios', \empleadoApi::class . ':horariosAllApi');
 
 $app->group('/comanda_productos', function () {

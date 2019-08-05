@@ -50,8 +50,8 @@ $app->group('/empleados', function () {
   $this->post('/', \empleadoApi::class . ':createApi');
   $this->delete('/{id_empleado}[/]', \empleadoApi::class . ':deleteApi');
   $this->post('/update', \empleadoApi::class . ':updateApi');
+  $this->get('/horarios', \empleadoApi::class . ':horariosAllApi');
 });
-$app->get('/horarios', \empleadoApi::class . ':horariosAllApi');
 
 $app->group('/comanda_productos', function () {
   $this->get('/', \comanda_productoApi::class . ':readAllApi');
