@@ -16,8 +16,7 @@ require './entities/mesas/mesasApi.php';
 require './entities/productos/productosApi.php';
 
 ///////////////////   MIDDLEWARE  ///////////
-require_once './middleware/MWAuth.php';
-require_once './middleware/MWparaCORS.php';
+require './middleware/MWAuth.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -38,8 +37,7 @@ $app->group('/clientes', function () {
   $this->post('/', \clienteApi::class . ':createApi');
   $this->delete('/{id_cliente}[/]', \clienteApi::class . ':deleteApi');
   $this->post('/update', \clienteApi::class . ':updateApi');
-})
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+});
 
 $app->group('/comandas', function () {
   $this->get('/', \comandaApi::class . ':readAllApi');
@@ -47,12 +45,9 @@ $app->group('/comandas', function () {
   $this->post('/', \comandaApi::class . ':createApi');
   $this->delete('/{id_comanda}[/]', \comandaApi::class . ':deleteApi');
   $this->post('/update', \comandaApi::class . ':updateApi');
-})
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/fueraTiempo', \comandaApi::class . ':fueraTiempoApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/canceladas', \comandaApi::class . ':canceladasApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+});
+$app->get('/fueraTiempo', \comandaApi::class . ':fueraTiempoApi');
+$app->get('/canceladas', \comandaApi::class . ':canceladasApi');
 
 
 $app->group('/empleados', function () {
@@ -61,19 +56,12 @@ $app->group('/empleados', function () {
   $this->post('/', \empleadoApi::class . ':createApi');
   $this->delete('/{id_empleado}[/]', \empleadoApi::class . ':deleteApi');
   $this->post('/update', \empleadoApi::class . ':updateApi');
-})
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-
+});
 $app->get('/horarios', \empleadoApi::class . ':horariosAllApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos')
-->add(\MWAuth::class . ':ValidarSocio');
-
-$app->get('/operaciones', \empleadoApi::class . ':operacionesAllApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/operEmpSecAll', \empleadoApi::class . ':operEmpSecAllApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/operEmpSec/{id_empleado}', \empleadoApi::class . ':operEmpSecApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+->add(\MWAuth.php::class . ':ValidarSocio');
+$app->get('/operaciones', \empleadoApi::class . ':operacionesAllApi');
+$app->get('/operEmpSecAll', \empleadoApi::class . ':operEmpSecAllApi');
+$app->get('/operEmpSec/{id_empleado}', \empleadoApi::class . ':operEmpSecApi');
 
 
 $app->group('/comanda_productos', function () {
@@ -82,11 +70,9 @@ $app->group('/comanda_productos', function () {
   $this->post('/', \comanda_productoApi::class . ':createApi');
   $this->delete('/{id_comanda_producto}[/]', \comanda_productoApi::class . ':deleteApi');
   $this->post('/update', \comanda_productoApi::class . ':updateApi');
-})->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/masvendido', \comanda_productoApi::class . ':masVendidoApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/menosvendido', \comanda_productoApi::class . ':menosVendidoApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+});
+$app->get('/masvendido', \comanda_productoApi::class . ':masVendidoApi');
+$app->get('/menosvendido', \comanda_productoApi::class . ':menosVendidoApi');
 
 
 
@@ -96,8 +82,7 @@ $app->group('/encuestas', function () {
   $this->post('/', \encuestaApi::class . ':createApi');
   $this->delete('/{id_encuesta}[/]', \encuestaApi::class . ':deleteApi');
   $this->post('/update', \encuestaApi::class . ':updateApi');
-})
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+});
 
 $app->group('/jornadas', function () {
   $this->get('/', \jornadaApi::class . ':readAllApi');
@@ -105,8 +90,7 @@ $app->group('/jornadas', function () {
   $this->post('/', \jornadaApi::class . ':createApi');
   $this->delete('/{id_jornada}[/]', \jornadaApi::class . ':deleteApi');
   $this->post('/update', \jornadaApi::class . ':updateApi');
-})
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+});
 
 $app->group('/mesas', function () {
   $this->get('/', \mesaApi::class . ':readAllApi');
@@ -114,20 +98,13 @@ $app->group('/mesas', function () {
   $this->post('/', \mesaApi::class . ':createApi');
   $this->delete('/{id_mesa}[/]', \mesaApi::class . ':deleteApi');
   $this->post('/update', \mesaApi::class . ':updateApi');
-})
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/mesaMasUsada', \mesaApi::class . ':mesaMasUsadaApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/mesaMenosUsada', \mesaApi::class . ':mesaMenosUsadaApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/mesaMasFacturo', \mesaApi::class . ':mesaMasFacturoApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/mesaMenosFacturo', \mesaApi::class . ':mesaMenosFacturoApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/mesaFacMAyor', \mesaApi::class . ':mesaFacMAyorApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-$app->get('/mesaFacMenor', \mesaApi::class . ':mesaFacMenorApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+});
+$app->get('/mesaMasUsada', \mesaApi::class . ':mesaMasUsadaApi');
+$app->get('/mesaMenosUsada', \mesaApi::class . ':mesaMenosUsadaApi');
+$app->get('/mesaMasFacturo', \mesaApi::class . ':mesaMasFacturoApi');
+$app->get('/mesaMenosFacturo', \mesaApi::class . ':mesaMenosFacturoApi');
+$app->get('/mesaFacMAyor', \mesaApi::class . ':mesaFacMAyorApi');
+$app->get('/mesaFacMenor', \mesaApi::class . ':mesaFacMenorApi');
 
 
 
@@ -137,9 +114,15 @@ $app->group('/productos', function () {
   $this->post('/', \productoApi::class . ':createApi');
   $this->delete('/{id_producto}[/]', \productoApi::class . ':deleteApi');
   $this->post('/update', \productoApi::class . ':updateApi');
-})
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+});
 
-
+// cors habilitadas
+$app->add(function ($req, $res, $next) {
+  $response = $next($req, $res);
+  return $response
+          ->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200')
+          ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+          ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
 
 $app->run();

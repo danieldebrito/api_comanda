@@ -17,7 +17,6 @@ require './entities/productos/productosApi.php';
 
 ///////////////////   MIDDLEWARE  ///////////
 require_once './middleware/MWAuth.php';
-require_once './middleware/MWparaCORS.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -65,8 +64,8 @@ $app->group('/empleados', function () {
 ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->get('/horarios', \empleadoApi::class . ':horariosAllApi')
-->add(\MWparaCORS::class . ':HabilitarCORSTodos')
-->add(\MWAuth::class . ':ValidarSocio');
+->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+//->add(\MWAuth.php::class . ':ValidarSocio');
 
 $app->get('/operaciones', \empleadoApi::class . ':operacionesAllApi')
 ->add(\MWparaCORS::class . ':HabilitarCORSTodos');

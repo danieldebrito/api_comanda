@@ -66,7 +66,7 @@ $app->group('/empleados', function () {
 
 $app->get('/horarios', \empleadoApi::class . ':horariosAllApi')
 ->add(\MWparaCORS::class . ':HabilitarCORSTodos')
-->add(\MWAuth::class . ':ValidarSocio');
+->add(\MWAuth.php::class . ':ValidarSocio');
 
 $app->get('/operaciones', \empleadoApi::class . ':operacionesAllApi')
 ->add(\MWparaCORS::class . ':HabilitarCORSTodos');

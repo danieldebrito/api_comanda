@@ -26,7 +26,7 @@ class clienteApi extends cliente implements IApiCRUD
         $ArrayDeParametros = $request->getParsedBody();
 
         $id_cliente = $ArrayDeParametros['id_cliente'];
-        $pass = $ArrayDeParametros['pass'];
+        $password = $ArrayDeParametros['password'];
         $nombre_y_apellido = $ArrayDeParametros['nombre_y_apellido'];
         $dni = $ArrayDeParametros['dni'];
         $sexo = $ArrayDeParametros['sexo'];
@@ -35,7 +35,7 @@ class clienteApi extends cliente implements IApiCRUD
         $cliente = new cliente();
 
         $cliente->id_cliente = $id_cliente;
-        $cliente->pass = $pass;
+        $cliente->password = $password;
         $cliente->nombre_y_apellido = $nombre_y_apellido;
         $cliente->dni = $dni;
         $cliente->sexo = $sexo;
@@ -61,7 +61,7 @@ class clienteApi extends cliente implements IApiCRUD
         $ArrayDeParametros = $request->getParsedBody();
         $cliente = new cliente();
         $cliente->id_cliente = $ArrayDeParametros['id_cliente'];
-        $cliente->pass = $ArrayDeParametros['pass'];
+        $cliente->password = $ArrayDeParametros['password'];
         $cliente->nombre_y_apellido = $ArrayDeParametros['nombre_y_apellido'];
         $cliente->dni = $ArrayDeParametros['dni'];
 		$cliente->sexo = $ArrayDeParametros['sexo'];

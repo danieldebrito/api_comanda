@@ -2,7 +2,7 @@
 class cliente
 {
     public $id_cliente;
-    public $pass;
+    public $password;
     public $nombre_y_apellido;
     public $dni;
     public $sexo;
@@ -49,17 +49,17 @@ class cliente
     {
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta
-            (" INSERT INTO `clientes`
+            $consulta = $objetoAccesoDato->RetornarConsulta("
+			INSERT INTO `clientes`
                 (`id_cliente`,
-                `pass`,
+                `password`,
 				`nombre_y_apellido`,
 				`dni`,
 				`sexo`,
 				`edad`)
 			VALUES (
                 :id_cliente,
-                :pass,
+                :password,
 				:nombre_y_apellido,
 				:dni,
 				:sexo,
@@ -67,7 +67,7 @@ class cliente
 		");
 
             $consulta->bindValue(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
-            $consulta->bindValue(':pass', $this->pass, PDO::PARAM_INT);
+            $consulta->bindValue(':password', $this->password, PDO::PARAM_INT);
             $consulta->bindValue(':nombre_y_apellido', $this->nombre_y_apellido, PDO::PARAM_STR);
             $consulta->bindValue(':dni', $this->dni, PDO::PARAM_INT);
             $consulta->bindValue(':sexo', $this->sexo, PDO::PARAM_STR);
@@ -107,7 +107,7 @@ class cliente
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("
                 UPDATE `clientes`
-                SET `pass`=:pass,
+                SET `password`=:password,
                     `nombre_y_apellido`=:nombre_y_apellido,
                     `dni`=:dni,
                     `sexo`=:sexo,
@@ -115,7 +115,7 @@ class cliente
                 WHERE id_cliente=:id_cliente");
                 
         $consulta->bindValue(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
-        $consulta->bindValue(':pass', $this->pass, PDO::PARAM_INT);
+        $consulta->bindValue(':password', $this->edad, PDO::PARAM_INT);
         $consulta->bindValue(':nombre_y_apellido', $this->nombre_y_apellido, PDO::PARAM_STR);
         $consulta->bindValue(':dni', $this->dni, PDO::PARAM_INT);
         $consulta->bindValue(':sexo', $this->sexo, PDO::PARAM_STR);

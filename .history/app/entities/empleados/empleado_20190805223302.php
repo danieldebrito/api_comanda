@@ -2,7 +2,7 @@
 class empleado
 {
     public $id_empleado;
-    public $pass;
+    public $password;
     public $rol_empleado;
     public $id_estado_empleado;
     public $nombre_y_apellido;
@@ -51,20 +51,20 @@ class empleado
             $consulta = $objetoAccesoDato->RetornarConsulta
             ("  INSERT INTO `empleados`
 				(`id_empleado`,
-                `pass`,
+                `password`,
 				`rol_empleado`,
 				`id_estado_empleado`,
                 `nombre_y_apellido`)
 			    VALUES (
 				:id_empleado,
-                :pass,
+                :password,
 				:rol_empleado,
 				:id_estado_empleado,
                 :nombre_y_apellido)
 		");
 
             $consulta->bindValue(':id_empleado', $this->id_empleado, PDO::PARAM_STR);
-            $consulta->bindValue(':pass', $this->pass, PDO::PARAM_INT);
+            $consulta->bindValue(':password', $this->password, PDO::PARAM_INT);
             $consulta->bindValue(':rol_empleado', $this->rol_empleado, PDO::PARAM_STR);
             $consulta->bindValue(':id_estado_empleado', $this->id_estado_empleado, PDO::PARAM_STR);
             $consulta->bindValue(':nombre_y_apellido', $this->nombre_y_apellido, PDO::PARAM_STR);
@@ -105,14 +105,14 @@ class empleado
         $consulta = $objetoAccesoDato->RetornarConsulta
             ("  UPDATE `empleados`
                 SET
-                `pass`=:pass,
+                `password`=:password,
 				`rol_empleado`=:rol_empleado,
 				`id_estado_empleado`=:id_estado_empleado,
                 `nombre_y_apellido`=:nombre_y_apellido
                 WHERE id_empleado=:id_empleado");
 
         $consulta->bindValue(':id_empleado', $this->id_empleado, PDO::PARAM_STR);
-        $consulta->bindValue(':pass', $this->pass, PDO::PARAM_INT);
+        $consulta->bindValue(':password', $this->password, PDO::PARAM_INT);
         $consulta->bindValue(':rol_empleado', $this->rol_empleado, PDO::PARAM_STR);
         $consulta->bindValue(':id_estado_empleado', $this->id_estado_empleado, PDO::PARAM_STR);
         $consulta->bindValue(':nombre_y_apellido', $this->nombre_y_apellido, PDO::PARAM_STR);
