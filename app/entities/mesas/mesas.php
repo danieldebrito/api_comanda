@@ -237,7 +237,33 @@ class mesa
             return $ret;
         }
     }
+
+    public static function mesaFacEntreFechas( $id_mesa, $fechaInicial, $fechaFinal ){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_comanda AS 'ID COMANDA', com.id_mesa AS 'ID MESA', SUM(prod.precio * cp.cantidad) AS 'TOTAL $'
+            FROM comanda_productos cp
+            INNER JOIN productos prod ON prod.id_producto = cp.id_producto
+            INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+            WHERE com.id_mesa = '$id_mesa'
+            AND com.fecha_comanda BETWEEN '$fechaInicial' AND '$fechaFinal'
+            ");
+            
+            var_dump($consulta);
+            
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
 }
+
+
 
 
 

@@ -104,7 +104,22 @@ class mesaApi extends mesa implements IApiCRUD
         $newResponse = $response->withJson($all, 200);
         return $newResponse;
     }
+
+    public function mesaFacEntreFechasApi($request, $response, $args)
+    {
+        $ArrayDeParametros = $request->getParsedBody();
+
+        $id_mesa=$linea=$ArrayDeParametros['id_mesa'];
+		$fechaInicial=$ArrayDeParametros['fechaInicial'];
+        $fechaFinal=$ArrayDeParametros['fechaFinal'];
+
+        $all = mesa::mesaFacEntreFechas( $id_mesa, $fechaInicial,  $fechaFinal);
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
 }
+
+
 
 
 

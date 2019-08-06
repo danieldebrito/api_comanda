@@ -128,6 +128,9 @@ $app->get('/mesaFacMAyor', \mesaApi::class . ':mesaFacMAyorApi')
 ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 $app->get('/mesaFacMenor', \mesaApi::class . ':mesaFacMenorApi')
 ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+$app->post('/mesaFacEntreFechas', \mesaApi::class . ':mesaFacEntreFechasApi')
+->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+
 
 
 
