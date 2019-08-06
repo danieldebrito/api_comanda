@@ -68,4 +68,20 @@ class encuestaApi extends encuesta implements IApiCRUD
         $objDelaRespuesta->resultado = $resultado;
         return $response->withJson($objDelaRespuesta, 200);
     }
+
+    public function mejoresComentariosApi($request, $response, $args)
+    {
+        $all = encuesta::mejoresComentarios();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
+
+    public function peoresComentariosApi($request, $response, $args)
+    {
+        $all = encuesta::peoresComentarios();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
 }
+
+

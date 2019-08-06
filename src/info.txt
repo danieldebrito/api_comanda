@@ -75,8 +75,18 @@ f-la/s que tuvo la factura con el menor importe.
     http://localhost/api_comanda/app/mesaFacMenor
 
 g-Lo que facturó entre dos fechas una mesa .
+    POST
+    http://localhost/api_comanda/app/mesaFacEntreFechas
 
+    params :
+    id_mesa
+    fechaInicial
+    fechaFinal
 
 h-Mejores comentarios.
+    GET
+    http://localhost/api_comanda/app/mejoresComentarios
 
 i-Peores comentarios.
+    GET
+    http://localhost/api_comanda/app/peoresComentarios

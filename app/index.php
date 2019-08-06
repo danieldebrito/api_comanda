@@ -88,8 +88,6 @@ $app->get('/masvendido', \comanda_productoApi::class . ':masVendidoApi')
 $app->get('/menosvendido', \comanda_productoApi::class . ':menosVendidoApi')
 ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
-
-
 $app->group('/encuestas', function () {
   $this->get('/', \encuestaApi::class . ':readAllApi');
   $this->get('/{id_encuesta}', \encuestaApi::class . ':readApi');
@@ -97,6 +95,10 @@ $app->group('/encuestas', function () {
   $this->delete('/{id_encuesta}[/]', \encuestaApi::class . ':deleteApi');
   $this->post('/update', \encuestaApi::class . ':updateApi');
 })
+->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+$app->get('/mejoresComentarios', \encuestaApi::class . ':mejoresComentariosApi')
+->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+$app->get('/peoresComentarios', \encuestaApi::class . ':peoresComentariosApi')
 ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->group('/jornadas', function () {

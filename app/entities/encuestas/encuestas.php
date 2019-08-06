@@ -121,4 +121,44 @@ class encuesta
         
         return $consulta->execute();
     }
+
+    public static function mejoresComentarios(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_comanda, enc.calificacion_restaurante
+            FROM comandas com
+            INNER JOIN encuestas enc ON enc.id_encuesta = com.id_encuesta
+            ORDER BY enc.calificacion_restaurante DESC
+            LIMIT 10
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
+
+    public static function peoresComentarios(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT com.id_comanda, enc.calificacion_restaurante
+            FROM comandas com
+            INNER JOIN encuestas enc ON enc.id_encuesta = com.id_encuesta
+            ORDER BY enc.calificacion_restaurante ASC
+            LIMIT 10
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
 }
