@@ -90,3 +90,14 @@ h-Mejores comentarios.
 i-Peores comentarios.
     GET
     http://localhost/api_comanda/app/peoresComentarios
+
+
+PENDIENTES POR EMPLEADO 
+
+todos: 
+    GET
+    http://localhost/api_comanda/app/pendientesEmpleados
+
+uno en particular:
+    GET
+    http://localhost/api_comanda/app/pendientesEmpleado/emp00007

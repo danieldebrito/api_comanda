@@ -85,5 +85,21 @@ class comanda_productoApi extends comanda_producto implements IApiCRUD
         $newResponse = $response->withJson($all, 200);
         return $newResponse;
     }
+
+    public function pendientesEmpleadoApi($request, $response, $args)
+    {
+        $id = $args['id_empleado'];
+        $Ret = comanda_producto::pendientesEmpleado($id);
+        $newResponse = $response->withJson($Ret, 200);
+        return $newResponse;
+    }
+
+    public function pendientesEmpleadosApi($request, $response, $args)
+    {
+        $all = comanda_producto::pendientesEmpleados();
+        $newResponse = $response->withJson($all, 200);
+        return $newResponse;
+    }
 }
+
 

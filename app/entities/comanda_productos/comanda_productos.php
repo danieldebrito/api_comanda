@@ -163,7 +163,56 @@ class comanda_producto
             return $ret;
         }
     }
+
+    public static function pendientesEmpleado($id_empleado){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT emp.id_empleado AS 'ID EMPLEADO' , emp.nombre_y_apellido AS 'NOMBRE Y APELLIDO', pro.producto AS 'PRODUCTO', cp.cantidad AS 'CANTIDAD', est.estado AS 'ESTADO PRODUCTO'
+            FROM comanda_productos cp
+            INNER JOIN productos pro ON pro.id_producto = cp.id_producto
+            INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+            INNER JOIN empleados emp ON emp.id_empleado = cp.id_empleado
+            INNER JOIN estados_productos est ON est.id_estado_producto = cp.id_estado_producto
+            WHERE com.id_estado_comanda = 'estComand01'
+            AND emp.id_empleado = '$id_empleado'            
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
+
+    public static function pendientesEmpleados(){
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+            ("  SELECT emp.id_empleado AS 'ID EMPLEADO' , emp.nombre_y_apellido AS 'ID NOMBRE Y APELLIDO', pro.producto  AS 'PRODUCTO', cp.cantidad  AS 'CANTIDAD', est.estado AS 'ESTADO PRODUCTO'
+            FROM comanda_productos cp
+            INNER JOIN productos pro ON pro.id_producto = cp.id_producto
+            INNER JOIN comandas com ON com.id_comanda = cp.id_comanda
+            INNER JOIN empleados emp ON emp.id_empleado = cp.id_empleado
+            INNER JOIN estados_productos est ON est.id_estado_producto = cp.id_estado_producto
+            WHERE com.id_estado_comanda = 'estComand01'  
+            ORDER BY emp.`id_empleado` ASC
+			");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
 }
+
+
+
 
 
 
