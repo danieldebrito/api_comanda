@@ -62,7 +62,7 @@ $app->group('/empleados', function () {
   $this->delete('/{id_empleado}[/]', \empleadoApi::class . ':deleteApi');
   $this->post('/update', \empleadoApi::class . ':updateApi');
 })
-->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+/*->add(\MWparaCORS::class . ':HabilitarCORSTodos')*/;
 
 $app->get('/horarios', \empleadoApi::class . ':horariosAllApi')
 ->add(\MWparaCORS::class . ':HabilitarCORSTodos')
